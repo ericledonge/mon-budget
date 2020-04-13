@@ -1,34 +1,48 @@
-# mon-budget
+# Projet Mon Budget
 
-## Project setup
-```
-npm install
-```
+## Concepts
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Un plan de dépense est caractérisé par:
 
-### Compiles and minifies for production
-```
-npm run build
-```
+- une plage temporelle (date de début et date de fin considérés : exemple entre le 1er avril et le 30 avril) ;
+- une date de réalisation (date à laquelle le plan de dépense est calculé: exemple le 10 mai) ;
+- une liste de catégories (revenus ou dépense), de sous-catégories (habitation, transport, etc...) et d'articles (loyer, électricité, etc...).
 
-### Run your unit tests
-```
-npm run test:unit
-```
+Pour chacun des articles, deux montants (pour chacun des conjoints, si pertinent), ainsi que des notes peuvent être saisis.
 
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
+Le plan de dépense permet de produire le sommaire de budget.
 
-### Lints and fixes files
-```
-npm run lint
-```
+Le sommaire de budget est caractérisé par:
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- le total du revenu mensuel ;
+- le total des dépenses mensuelles ;
+- la différence entre le total du revenu mensuel et le total des dépenses mensuelles.
+
+La section des dettes est caratérisée par: (à venir).
+
+La section épargne est caratérisée par: (à venir).
+
+## Objectifs du projet
+
+1. Permettre à un visiteur (anonyme) de réaliser un plan de dépense pour disposer d'un sommaire de budget.
+2. Permettre à un utilisateur (authentifié) de réaliser des plans de dépense disposer de sommaires de budget et de suivre son évolution.
+3. Permettre à un administrateur de consulter tous les plans de dépenses réalisées (par des utilisateurs anonymes ou authentifiés.)
+4. Permettre à un administrateur de pouvoir modifier les informations demandées (catégorie, sous-catégories et articles).
+
+## Architecture du projet
+
+Frontend en Vue.JS + Buefy.
+Backend sur FireStore avec des API REST.
+
+## Proposition de MVP:
+
+- Demander la situation familiale du visiteur.
+- Permettre la saisie des revenus du visiteur.
+- Présenter le sommaire de budget, avec uniquement la section revenus.
+
+MVP : Avec une liste statique des catégories, des sous-catégories et des articles, stockée dans le frontend.
+
+## Questions et points en suspens
+
+1. Préciser la section des dettes.
+2. Préciser la section épargne.
