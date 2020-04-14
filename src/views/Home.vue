@@ -1,8 +1,8 @@
 <template>
   <hero
-    title="Mon Budget"
-    subtitle="Calculer facilement votre budget en quelques clics!"
-    textButton="Démarrer votre analyse"
+    :title="$t('homepage.title')"
+    :subtitle="$t('homepage.subtitle')"
+    :textButton="$t('homepage.textButton')"
     linkButton="/analyze"
   />
 </template>
