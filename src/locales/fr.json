@@ -2,6 +2,28 @@
   "homepage": {
     "title": "Mon Budget",
     "subtitle": "Calculer facilement votre budget en quelques clics!",
-    "textButton": "Démarrer votre analyse"
+    "textButton": "Démarrer mon analyse"
+  },
+  "analyze": {
+    "first-step-basic-info": "Étape 1: Informations de base",
+    "single": "Célibataire",
+    "married": "Marié(e)",
+    "divorced": "Divorcé(e)",
+    "widowed": "Veuf / Veuve",
+    "what-is-your-name": "Quel est votre nom?",
+    "what-is-your-marital-status": "Quelle est votre situation maritale?",
+    "select-your-marital-status": "Sélectionnez votre situation maritale",
+    "do-you-have-kids": "Avez-vous des enfants?",
+    "how-many-do-you-have-kids": "Combien d'enfants avez-vous?",
+    "yes": "Oui",
+    "no": "Non",
+    "next": "Suivant"
+  },
+  "summary": {
+    "title": "Sommaire",
+    "your-name": "Votre nom est: ",
+    "your-marital-status": "Votre situation est: ",
+    "your-kids": "Vous avez le nombre d'enfants suivant: ",
+    "without-kid": "Vous n'avez pas d'enfants"
   }
 }

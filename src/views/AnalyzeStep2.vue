@@ -1,13 +1,11 @@
 <template>
   <div>
-    Analyze
+    STEP 2
   </div>
 </template>
 
 <script>
-export default {
-  name: 'Analyze'
-};
+export default {};
 </script>
 
 <style lang="scss" scoped></style>

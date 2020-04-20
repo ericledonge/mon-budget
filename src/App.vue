@@ -70,4 +70,9 @@ $link-focus-border: $primary;
 // Import Bulma and Buefy styles
 @import '~bulma';
 @import '~buefy/src/scss/buefy';
+
+.question,
+.answer {
+  padding-top: 2rem;
+}
 </style>
