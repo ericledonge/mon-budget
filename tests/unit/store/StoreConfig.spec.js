@@ -1,6 +1,6 @@
 import Vuex from 'vuex';
 import { createLocalVue } from '@vue/test-utils';
-import storeConfig from '@/store/storeConfig.js';
+import storeConfig from '@/store/StoreConfig.js';
 import cloneDeep from 'lodash.clonedeep';
 import { FAKE_USER } from '../mocks/mockData.js';
 
