@@ -1,9 +1,11 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
+import Vuelidate from 'vuelidate';
 import AnalyzeStep1 from '@/views/AnalyzeStep1.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
+localVue.use(Vuelidate);
 
 let wrapper;
 let store;
@@ -97,6 +99,11 @@ describe('AnalyzeStep1', () => {
   describe('When the visitor submits the basic info form', () => {
     beforeAll(() => {
       wrapper = wrapperFactory(AnalyzeStep1, initialStore);
+      wrapper.setData({
+        maritalStatus: 'Marié',
+        hasKids: true,
+        name: 'Toto'
+      });
     });
     it('should call the addBasicInfo action', async () => {
       wrapper.find('[data-test="button-next"]').trigger('click');

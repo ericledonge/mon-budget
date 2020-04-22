@@ -5,7 +5,7 @@
         <h1 class="title">{{ $t('analyze.first-step-basic-info') }}</h1>
 
         <question :title="$t('analyze.what-is-your-name')">
-          <b-input v-model="name" data-test="name"></b-input>
+          <b-input v-model="name" data-test="name" required />
         </question>
 
         <question :title="$t('analyze.what-is-your-marital-status')">
@@ -13,6 +13,7 @@
             :placeholder="$t('analyze.select-your-marital-status')"
             v-model="maritalStatus"
             data-test="marital-status"
+            required
           >
             <option
               v-for="option in options"
@@ -48,6 +49,7 @@
             size="is-small"
             icon-pack="fas"
             data-test="has-kids"
+            required
           ></b-numberinput>
         </question>
 
@@ -56,7 +58,7 @@
             to="/summary"
             tag="button"
             class="button"
-            :disabled="hasEnteredAllData"
+            :disabled="$v.$invalid"
             data-test="button-next"
             @click.native="submitBasicInfo"
           >
@@ -69,6 +71,7 @@
 </template>
 
 <script>
+import { required } from 'vuelidate/lib/validators';
 import { mapActions } from 'vuex';
 import Question from '@/components/Question.vue';
 
@@ -91,24 +94,26 @@ export default {
       ]
     };
   },
-  computed: {
-    hasEnteredAllData() {
-      return (
-        this.name === null ||
-        this.maritalStatus === null ||
-        this.hasKids === null
-      );
+  validations: {
+    name: {
+      required
+    },
+    maritalStatus: {
+      required
     }
   },
   methods: {
     ...mapActions(['addBasicInfo']),
     submitBasicInfo() {
-      this.addBasicInfo({
-        name: this.name,
-        maritalStatus: this.maritalStatus,
-        hasKids: this.hasKids,
-        numberOfKids: this.numberOfKids
-      });
+      this.$v.$touch();
+      if (!this.$v.$invalid) {
+        this.addBasicInfo({
+          name: this.name,
+          maritalStatus: this.maritalStatus,
+          hasKids: this.hasKids,
+          numberOfKids: this.numberOfKids
+        });
+      }
     }
   }
 };

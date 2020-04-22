@@ -15,6 +15,10 @@ Vue.use(Buefy, {
   defaultIconPack: 'fas'
 });
 
+import Vuelidate from 'vuelidate';
+
+Vue.use(Vuelidate);
+
 import router from './router';
 import Vuex from 'vuex';
 import storeConfig from '@/store/StoreConfig';
