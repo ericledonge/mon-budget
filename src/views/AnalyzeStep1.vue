@@ -55,7 +55,7 @@
 
         <div class="question" align="right">
           <router-link
-            to="/summary"
+            to="/analyze/step-2"
             tag="button"
             class="button"
             :disabled="$v.$invalid"

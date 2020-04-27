@@ -1,4 +1,10 @@
 {
+  "commons": {
+    "revenues": "Revenues",
+    "you": "You",
+    "partner": "Partner",
+    "comments": "Comments"
+  },
   "homepage": {
     "title": "My Budget",
     "subtitle": "Easily calculate your budget in just a few clicks!",
@@ -19,11 +25,23 @@
     "no": "No",
     "next": "Next"
   },
+  "revenues": {
+    "second-step-revenues": "Step 2: Monthly revenues",
+    "net-salaries": "Net salaries",
+    "rental-revenues": "Rental net revenues",
+    "public-benefits": "Public benefits",
+    "private-benefits": "Private benefits",
+    "child-benefits": "Child benefits",
+    "bonuses": "bonuses",
+    "investment-income": "Investment income",
+    "other-revenues": "Other revenues"
+  },
   "summary": {
     "title": "Summary",
     "your-name": "Your name is: ",
     "your-marital-status": "Your situation is: ",
     "your-kids": "You have the following number of children: ",
-    "without-kid": "You don't have a child."
+    "without-kid": "You don't have a child.",
+    "total-monthly-household-revenues": "Your total monthly household revenues are: "
   }
 }

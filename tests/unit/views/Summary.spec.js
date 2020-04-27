@@ -17,6 +17,11 @@ let withKidsStore = {
         hasKids: jest.fn().mockReturnValue(true),
         numberOfKids: jest.fn().mockReturnValue(2)
       }
+    },
+    Revenues: {
+      getters: {
+        getTotalMonthlyHouseholdRevenues: jest.fn()
+      }
     }
   }
 };
@@ -29,6 +34,29 @@ let withoutKidStore = {
         maritalStatus: jest.fn().mockReturnValue('Divorced'),
         hasKids: jest.fn().mockReturnValue(false),
         numberOfKids: jest.fn().mockReturnValue(0)
+      }
+    },
+    Revenues: {
+      getters: {
+        getTotalMonthlyHouseholdRevenues: jest.fn()
+      }
+    }
+  }
+};
+
+let withKidsAndRevenuesStore = {
+  modules: {
+    BasicInfo: {
+      getters: {
+        username: jest.fn().mockReturnValue('Toto'),
+        maritalStatus: jest.fn().mockReturnValue('Divorced'),
+        hasKids: jest.fn().mockReturnValue(true),
+        numberOfKids: jest.fn().mockReturnValue(2)
+      }
+    },
+    Revenues: {
+      getters: {
+        getTotalMonthlyHouseholdRevenues: jest.fn().mockReturnValue(4600)
       }
     }
   }
@@ -63,7 +91,7 @@ describe('Summary', () => {
     beforeEach(() => {
       wrapper = wrapperFactory(Summary, withoutKidStore);
     });
-    it('should render the without kids div', () => {
+    it('should render the without kids section', () => {
       expect(wrapper.find('[data-test="without-kid"]').exists()).toBe(true);
       expect(wrapper.find('[data-test="number-kids"]').exists()).toBe(false);
     });
@@ -73,10 +101,21 @@ describe('Summary', () => {
     beforeEach(() => {
       wrapper = wrapperFactory(Summary, withKidsStore);
     });
-    it('should render the with kids div', () => {
+    it('should render the kids section', () => {
       expect(wrapper.find('[data-test="without-kid"]').exists()).toBe(false);
       expect(wrapper.find('[data-test="number-kids"]').exists()).toBe(true);
       expect(wrapper.find('[data-test="number-kids"]').text()).toContain('2');
+    });
+  });
+
+  describe('When the visitors tells us his revenues', () => {
+    beforeEach(() => {
+      wrapper = wrapperFactory(Summary, withKidsAndRevenuesStore);
+    });
+    it('should render the revenues section', () => {
+      expect(
+        wrapper.find('[data-test="total-monthly-household-revenues"]').text()
+      ).toContain('4600');
     });
   });
 });

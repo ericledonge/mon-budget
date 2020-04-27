@@ -10,7 +10,8 @@
 
         <div class="answer" data-test="marital-status">
           {{
-            $t('summary.your-marital-status') + $t(`analyze.${maritalStatus}`)
+            $t('summary.your-marital-status') +
+              ($t(`analyze.${maritalStatus}`) || '')
           }}
         </div>
 
@@ -20,6 +21,11 @@
 
         <div class="answer" v-else data-test="without-kid">
           {{ $t('summary.without-kid') }}
+        </div>
+
+        <div class="answer" data-test="total-monthly-household-revenues">
+          {{ $t('summary.total-monthly-household-revenues') }}
+          {{ getTotalMonthlyHouseholdRevenues }}
         </div>
       </div>
     </div>
@@ -32,7 +38,13 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'Summary',
   computed: {
-    ...mapGetters(['username', 'maritalStatus', 'hasKids', 'numberOfKids'])
+    ...mapGetters([
+      'username',
+      'maritalStatus',
+      'hasKids',
+      'numberOfKids',
+      'getTotalMonthlyHouseholdRevenues'
+    ])
   }
 };
 </script>

@@ -1,4 +1,10 @@
 {
+  "commons": {
+    "revenues": "Revenus",
+    "you": "Vous",
+    "partner": "Conjoint",
+    "comments": "Notes"
+  },
   "homepage": {
     "title": "Mon Budget",
     "subtitle": "Calculer facilement votre budget en quelques clics!",
@@ -19,11 +25,23 @@
     "no": "Non",
     "next": "Suivant"
   },
+  "revenues": {
+    "second-step-revenues": "Étape 2 : Revenus mensuels",
+    "net-salaries": "Salaires net",
+    "rental-revenues": "Revenus net de locations",
+    "public-benefits": "Prestations de régimes publics (Assurance emploi, CSST, RRQ, etc.)",
+    "private-benefits": "Prestations de régimes privés (d'un régime de retraite, d'un assureur, etc.)",
+    "child-benefits": "Allocations pour enfants",
+    "bonuses": "Bonus",
+    "investment-income": "Revenus de placement",
+    "other-revenues": "Autres revenus"
+  },
   "summary": {
     "title": "Sommaire",
     "your-name": "Votre nom est: ",
     "your-marital-status": "Votre situation est: ",
     "your-kids": "Vous avez le nombre d'enfants suivant: ",
-    "without-kid": "Vous n'avez pas d'enfants"
+    "without-kid": "Vous n'avez pas d'enfants",
+    "total-monthly-household-revenues": "Vos revenus mensuels de ménage sont: "
   }
 }

@@ -45,12 +45,9 @@ describe('Analyze-Step-1', () => {
     it('should be able to go to the next questions', () => {
       cy.get('.button').should('not.be.disabled');
     });
-    it('should be redirected to the Summary page', () => {
+    it('should be redirected to the Analyze step 2 page', () => {
       cy.get('.button').click();
-      cy.url().should('include', '/summary');
-      cy.get('[data-test="name"]').should('contain', 'Toto');
-      cy.get('[data-test="marital-status"]').should('contain', 'Marié(e)');
-      cy.get('[data-test="without-kid"]').should('be.visible');
+      cy.url().should('include', '/analyze/step-2');
     });
   });
 });

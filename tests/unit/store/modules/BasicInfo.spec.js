@@ -1,19 +1,21 @@
 import basicInfo from '@/store/modules/BasicInfo.module';
-import { INITIAL_STATE, FAKE_USER } from '../../mocks/mockData.js';
+import { FAKE_BASIC_INFO_ANSWERS } from '../../mocks/mockData.js';
 
 let state;
 let commit;
 
-describe('BasicInfo', () => {
+describe('BasicInfo Module', () => {
   describe('getters', () => {
     describe('basicInfo', () => {
       beforeEach(() => {
         state = {
-          ...FAKE_USER
+          ...FAKE_BASIC_INFO_ANSWERS
         };
       });
       it('should return the basic info', () => {
-        expect(basicInfo.getters.basicInfo(state)).toEqual(FAKE_USER);
+        expect(basicInfo.getters.basicInfo(state)).toEqual(
+          FAKE_BASIC_INFO_ANSWERS
+        );
       });
     });
   });
@@ -21,13 +23,11 @@ describe('BasicInfo', () => {
   describe('mutations', () => {
     describe('ADD_BASIC_INFO', () => {
       beforeEach(() => {
-        state = {
-          ...INITIAL_STATE
-        };
-        basicInfo.mutations.ADD_BASIC_INFO(state, FAKE_USER);
+        state = {};
+        basicInfo.mutations.ADD_BASIC_INFO(state, FAKE_BASIC_INFO_ANSWERS);
       });
       it('should mutate the state', () => {
-        expect(state).toEqual(FAKE_USER);
+        expect(state).toEqual(FAKE_BASIC_INFO_ANSWERS);
       });
     });
   });
@@ -36,10 +36,16 @@ describe('BasicInfo', () => {
     describe('addBasicInfo', () => {
       beforeEach(async () => {
         commit = jest.fn();
-        await basicInfo.actions.addBasicInfo({ commit }, FAKE_USER);
+        await basicInfo.actions.addBasicInfo(
+          { commit },
+          FAKE_BASIC_INFO_ANSWERS
+        );
       });
       it('should call the mutation', async () => {
-        expect(commit).toHaveBeenCalledWith('ADD_BASIC_INFO', FAKE_USER);
+        expect(commit).toHaveBeenCalledWith(
+          'ADD_BASIC_INFO',
+          FAKE_BASIC_INFO_ANSWERS
+        );
       });
     });
   });

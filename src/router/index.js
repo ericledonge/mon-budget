@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import AnalyzeStep1 from '@/views/AnalyzeStep1.vue';
+import AnalyzeStep2 from '@/views/AnalyzeStep2.vue';
 import Summary from '@/views/Summary.vue';
 
 Vue.use(VueRouter);
@@ -16,6 +17,11 @@ const routes = [
     path: '/analyze/step-1',
     name: 'AnalyzeStep1',
     component: AnalyzeStep1
+  },
+  {
+    path: '/analyze/step-2',
+    name: 'AnalyzeStep2',
+    component: AnalyzeStep2
   },
   {
     path: '/summary',
