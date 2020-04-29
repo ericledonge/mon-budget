@@ -1,9 +1,9 @@
 <template>
   <section class="section">
-    <div class="columns is-centered">
-      <div class="column is-half">
-        <h1 class="title">{{ $t('analyze.first-step-basic-info') }}</h1>
+    <stepper />
 
+    <div class="columns is-centered">
+      <div class="column is-one-third">
         <question :title="$t('analyze.what-is-your-name')">
           <b-input v-model="name" data-test="name" required />
         </question>
@@ -74,11 +74,13 @@
 import { required } from 'vuelidate/lib/validators';
 import { mapActions } from 'vuex';
 import Question from '@/components/Question.vue';
+import Stepper from '@/components/Stepper.vue';
 
 export default {
   name: 'Analyze',
   components: {
-    Question
+    Question,
+    Stepper
   },
   data() {
     return {
@@ -103,7 +105,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['addBasicInfo']),
+    ...mapActions(['addBasicInfo', 'setCurrentStep']),
     submitBasicInfo() {
       this.$v.$touch();
       if (!this.$v.$invalid) {
@@ -115,6 +117,9 @@ export default {
         });
       }
     }
+  },
+  created() {
+    this.setCurrentStep(0);
   }
 };
 </script>

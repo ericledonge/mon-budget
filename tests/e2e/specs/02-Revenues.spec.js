@@ -30,6 +30,11 @@ describe('Analyze-Step-2', () => {
         .children()
         .eq(1)
         .type('100');
+      cy.get('[data-test="public-benefits"]')
+        .siblings()
+        .children()
+        .eq(0)
+        .type('toto');
       cy.get('[data-test="private-benefits"]')
         .siblings()
         .children()

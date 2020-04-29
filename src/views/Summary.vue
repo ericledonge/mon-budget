@@ -1,9 +1,8 @@
 <template>
   <section class="section">
+    <stepper />
     <div class="columns is-centered">
       <div class="column is-half">
-        <h1 class="title">{{ $t('summary.title') }}</h1>
-
         <div class="answer" data-test="name">
           {{ $t('summary.your-name') + username }}
         </div>
@@ -19,10 +18,6 @@
           {{ $t('summary.your-kids') }} {{ numberOfKids }}
         </div>
 
-        <div class="answer" v-else data-test="without-kid">
-          {{ $t('summary.without-kid') }}
-        </div>
-
         <div class="answer" data-test="total-monthly-household-revenues">
           {{ $t('summary.total-monthly-household-revenues') }}
           {{ getTotalMonthlyHouseholdRevenues }}
@@ -33,10 +28,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
+import Stepper from '@/components/Stepper.vue';
 
 export default {
   name: 'Summary',
+  components: {
+    Stepper
+  },
   computed: {
     ...mapGetters([
       'username',
@@ -45,6 +44,12 @@ export default {
       'numberOfKids',
       'getTotalMonthlyHouseholdRevenues'
     ])
+  },
+  methods: {
+    ...mapActions(['setCurrentStep'])
+  },
+  created() {
+    this.setCurrentStep(2);
   }
 };
 </script>

@@ -67,11 +67,16 @@ $link: $primary;
 $link-invert: $primary-invert;
 $link-focus-border: $primary;
 
+$section-padding: 1.5rem 0.75rem;
+
 // Import Bulma and Buefy styles
 @import '~bulma';
 @import '~buefy/src/scss/buefy';
 
-.question,
+.question:not(:first) {
+  padding-top: 2rem;
+}
+
 .answer {
   padding-top: 2rem;
 }

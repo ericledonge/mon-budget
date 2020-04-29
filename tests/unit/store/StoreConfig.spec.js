@@ -19,23 +19,6 @@ describe('Store', () => {
     store = new Vuex.Store(clonedStoreConfig);
   });
 
-  describe('Getters', () => {
-    it('should return the number of revenues items', () => {
-      expect(store.getters['getNumberOfRevenuesItems']).toEqual(8);
-    });
-  });
-
-  describe('Mutations', () => {
-    describe('ADD_BASIC_INFO', () => {
-      beforeEach(() => {
-        store.commit('ADD_BASIC_INFO', FAKE_BASIC_INFO_ANSWERS);
-      });
-      it('should fill in the answer of basic information', () => {
-        expect(store.getters['basicInfo']).toEqual(FAKE_BASIC_INFO_ANSWERS);
-      });
-    });
-  });
-
   describe('Actions', () => {
     describe('AddBasicInfo - When the user submits his basic info', () => {
       beforeEach(async () => {
@@ -54,6 +37,16 @@ describe('Store', () => {
         expect(store.getters['getRevenuesItems']).toEqual(
           FAKE_REVENUES_ANSWERS
         );
+      });
+    });
+
+    describe('setCurrentStep - When the user goes to the next step', () => {
+      const stepNumber = 3;
+      beforeEach(async () => {
+        await store.dispatch('setCurrentStep', stepNumber);
+      });
+      it('should update his current step in the workflow', () => {
+        expect(store.getters['getCurrentStep']).toEqual(stepNumber);
       });
     });
   });

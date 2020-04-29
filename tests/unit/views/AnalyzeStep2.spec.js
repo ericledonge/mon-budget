@@ -17,6 +17,11 @@ let initialStore = {
       actions: {
         addRevenuesAnswers: jest.fn()
       }
+    },
+    Workflow: {
+      actions: {
+        setCurrentStep: jest.fn()
+      }
     }
   }
 };
@@ -62,6 +67,12 @@ describe('AnalyzeStep2', () => {
     await wrapper.vm.$nextTick();
     expect(
       initialStore.modules.Revenues.actions.addRevenuesAnswers
+    ).toHaveBeenCalled();
+  });
+
+  it('should call the setCurrentStep when the page is loading', () => {
+    expect(
+      initialStore.modules.Workflow.actions.setCurrentStep
     ).toHaveBeenCalled();
   });
 });

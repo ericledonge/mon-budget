@@ -30,3 +30,9 @@ export const FAKE_REVENUES_ANSWERS = [
   },
   { name: 'other-revenues', user: 200, partner: 0, comments: null }
 ];
+
+export const FAKE_STEPS = [
+  { label: 'Step 1 - label', content: 'Step 1 - content', displayed: true },
+  { label: 'Step 2 - label', content: 'Step 2 - content', displayed: true },
+  { label: 'Step 3 - label', content: 'Step 3 - content', displayed: true }
+];

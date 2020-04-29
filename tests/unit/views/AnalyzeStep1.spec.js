@@ -11,11 +11,21 @@ let wrapper;
 let store;
 let initialStore;
 
+let name = 'Toto';
+let maritalStatus = 'Divorced';
+let hasKids = true;
+let numberOfKids = 2;
+
 initialStore = {
   modules: {
     BasicInfo: {
       actions: {
         addBasicInfo: jest.fn()
+      }
+    },
+    Workflow: {
+      actions: {
+        setCurrentStep: jest.fn()
       }
     }
   }
@@ -58,11 +68,7 @@ describe('AnalyzeStep1', () => {
   describe('When the form is completed', () => {
     beforeAll(() => {
       wrapper = wrapperFactory(AnalyzeStep1, initialStore);
-      wrapper.setData({
-        maritalStatus: 'Marié',
-        hasKids: true,
-        name: 'Toto'
-      });
+      wrapper.setData({ maritalStatus, hasKids, name });
     });
 
     it('should be possible to continue to the next step', () => {
@@ -75,9 +81,7 @@ describe('AnalyzeStep1', () => {
   describe('When the visitor told he/she has no kid', () => {
     beforeAll(() => {
       wrapper = wrapperFactory(AnalyzeStep1, initialStore);
-      wrapper.setData({
-        hasKids: false
-      });
+      wrapper.setData({ hasKids: false });
     });
     it('should not be able to select how many he/she has', () => {
       expect(wrapper.find('[data-test="number-kids"]').exists()).toBe(false);
@@ -87,9 +91,7 @@ describe('AnalyzeStep1', () => {
   describe('When the visitor told he/she has kids', () => {
     beforeAll(() => {
       wrapper = wrapperFactory(AnalyzeStep1, initialStore);
-      wrapper.setData({
-        hasKids: true
-      });
+      wrapper.setData({ hasKids });
     });
     it('should be able to select how many he/she has', () => {
       expect(wrapper.find('[data-test="number-kids"]').exists()).toBe(true);
@@ -99,17 +101,22 @@ describe('AnalyzeStep1', () => {
   describe('When the visitor submits the basic info form', () => {
     beforeAll(() => {
       wrapper = wrapperFactory(AnalyzeStep1, initialStore);
-      wrapper.setData({
-        maritalStatus: 'Marié',
-        hasKids: true,
-        name: 'Toto'
-      });
+      wrapper.setData({ maritalStatus, hasKids, name });
     });
     it('should call the addBasicInfo action', async () => {
       wrapper.find('[data-test="button-next"]').trigger('click');
       await wrapper.vm.$nextTick();
       expect(
         initialStore.modules.BasicInfo.actions.addBasicInfo
+      ).toHaveBeenCalled();
+    });
+  });
+
+  describe('When the page has loaded', () => {
+    it('should call the setCurrentStep', () => {
+      wrapper = wrapperFactory(AnalyzeStep1, initialStore);
+      expect(
+        initialStore.modules.Workflow.actions.setCurrentStep
       ).toHaveBeenCalled();
     });
   });
