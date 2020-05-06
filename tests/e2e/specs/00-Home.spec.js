@@ -14,8 +14,8 @@ describe('Home', () => {
     beforeEach(() => {
       cy.get('.button').click();
     });
-    it('should be redirected to the Analyze page', () => {
-      cy.url().should('include', '/analyze');
+    it('should be redirected to the Basic Info form', () => {
+      cy.url().should('include', '/basic-info');
     });
   });
 });

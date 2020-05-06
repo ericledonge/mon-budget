@@ -1,16 +1,14 @@
 <template>
-  <section class="section">
-    <stepper />
-
-    <div class="columns is-centered">
-      <div class="column is-one-third">
-        <question :title="$t('analyze.what-is-your-name')">
+  <span>
+    <div class="columns is-centered is-mobile">
+      <div class="column is-3-desktop">
+        <question :title="$t('basic-info.what-is-your-name')">
           <b-input v-model="name" data-test="name" required />
         </question>
 
-        <question :title="$t('analyze.what-is-your-marital-status')">
+        <question :title="$t('basic-info.what-is-your-marital-status')">
           <b-select
-            :placeholder="$t('analyze.select-your-marital-status')"
+            :placeholder="$t('basic-info.select-your-marital-status')"
             v-model="maritalStatus"
             data-test="marital-status"
             required
@@ -25,20 +23,23 @@
           </b-select>
         </question>
 
-        <question :title="$t('analyze.do-you-have-kids')" data-test="has-kids">
+        <question
+          :title="$t('basic-info.do-you-have-kids')"
+          data-test="has-kids"
+        >
           <div class="block">
             <b-radio v-model="hasKids" name="name" :native-value="true">
-              {{ $t('analyze.yes') }}
+              {{ $t('commons.yes') }}
             </b-radio>
             <b-radio v-model="hasKids" name="name" :native-value="false">
-              {{ $t('analyze.no') }}
+              {{ $t('commons.no') }}
             </b-radio>
           </div>
         </question>
 
         <question
           v-if="hasKids"
-          :title="$t('analyze.how-many-do-you-have-kids')"
+          :title="$t('basic-info.how-many-do-you-have-kids')"
           data-test="number-kids"
         >
           <b-numberinput
@@ -52,35 +53,33 @@
             required
           ></b-numberinput>
         </question>
-
-        <div class="question" align="right">
-          <router-link
-            to="/analyze/step-2"
-            tag="button"
-            class="button"
-            :disabled="$v.$invalid"
-            data-test="button-next"
-            @click.native="submitBasicInfo"
-          >
-            {{ $t('analyze.next') }}
-          </router-link>
-        </div>
       </div>
     </div>
-  </section>
+
+    <div class="columns is-centered is-mobile">
+      <div class="column is-3-desktop" align="right">
+        <b-button
+          class="button is-primary"
+          @click.native="submit"
+          :disabled="$v.$invalid"
+          data-test="button-next"
+        >
+          {{ $t('commons.next') }}
+        </b-button>
+      </div>
+    </div>
+  </span>
 </template>
 
 <script>
 import { required } from 'vuelidate/lib/validators';
 import { mapActions } from 'vuex';
 import Question from '@/components/Question.vue';
-import Stepper from '@/components/Stepper.vue';
 
 export default {
-  name: 'Analyze',
+  name: 'BasicInfoForm',
   components: {
-    Question,
-    Stepper
+    Question
   },
   data() {
     return {
@@ -89,10 +88,10 @@ export default {
       hasKids: false,
       numberOfKids: 0,
       options: [
-        { label: this.$t('analyze.single'), value: 'single' },
-        { label: this.$t('analyze.married'), value: 'married' },
-        { label: this.$t('analyze.divorced'), value: 'divorced' },
-        { label: this.$t('analyze.widowed'), value: 'widowed' }
+        { label: this.$t('basic-info.single'), value: 'single' },
+        { label: this.$t('basic-info.married'), value: 'married' },
+        { label: this.$t('basic-info.divorced'), value: 'divorced' },
+        { label: this.$t('basic-info.widowed'), value: 'widowed' }
       ]
     };
   },
@@ -105,8 +104,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['addBasicInfo', 'setCurrentStep']),
-    submitBasicInfo() {
+    ...mapActions(['addBasicInfo', 'incrementStep']),
+    submit() {
       this.$v.$touch();
       if (!this.$v.$invalid) {
         this.addBasicInfo({
@@ -115,11 +114,10 @@ export default {
           hasKids: this.hasKids,
           numberOfKids: this.numberOfKids
         });
+        this.incrementStep();
+        this.$router.push('/revenues');
       }
     }
-  },
-  created() {
-    this.setCurrentStep(0);
   }
 };
 </script>

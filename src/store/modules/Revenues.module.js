@@ -55,23 +55,20 @@ export default {
     getRevenuesItems: state => {
       return state.revenuesItems;
     },
-    getNumberOfRevenuesItems: (_, getters) => {
-      return getters.getRevenuesItems && getters.getRevenuesItems.length;
-    },
-    getTotalMonthlyHouseholdRevenues: (_, getters) => {
+    getRevenuesSum: (_, getters) => {
       return getters.getRevenuesItems.reduce(function(acc, item) {
         return acc + item.user + item.partner;
       }, 0);
     }
   },
   mutations: {
-    ADD_REVENUES_ANSWERS: (state, payload) => {
+    ADD_REVENUES: (state, payload) => {
       state.revenuesItems = payload;
     }
   },
   actions: {
-    addRevenuesAnswers({ commit }, payload) {
-      commit('ADD_REVENUES_ANSWERS', payload);
+    addRevenues({ commit }, payload) {
+      commit('ADD_REVENUES', payload);
     }
   }
 };

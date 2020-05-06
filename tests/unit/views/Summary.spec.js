@@ -12,7 +12,24 @@ let username = 'Toto';
 let maritalStatus = 'Divorced';
 let hasKids = true;
 let numberOfKids = 2;
-let totalMonthlyHouseholdRevenues = 4600;
+let revenues = 5000;
+let housingExpenses = 1368;
+let transportExpenses = 852;
+let insuranceExpenses = 100;
+let foodExpenses = 649;
+let leisureExpenses = 312;
+let educationExpenses = 83;
+let healthExpenses = 243;
+let variousExpenses = 356;
+let sumExpenses =
+  housingExpenses +
+  transportExpenses +
+  insuranceExpenses +
+  foodExpenses +
+  leisureExpenses +
+  educationExpenses +
+  healthExpenses +
+  variousExpenses;
 
 let initialStore = {
   modules: {
@@ -26,14 +43,15 @@ let initialStore = {
     },
     Revenues: {
       getters: {
-        getTotalMonthlyHouseholdRevenues: jest
-          .fn()
-          .mockReturnValue(totalMonthlyHouseholdRevenues)
-      }
-    },
-    Workflow: {
-      actions: {
-        setCurrentStep: jest.fn()
+        getRevenuesSum: jest.fn().mockReturnValue(revenues),
+        getExpensesHousingSum: jest.fn().mockReturnValue(housingExpenses),
+        getExpensesTransportSum: jest.fn().mockReturnValue(transportExpenses),
+        getExpensesInsuranceSum: jest.fn().mockReturnValue(insuranceExpenses),
+        getExpensesFoodSum: jest.fn().mockReturnValue(foodExpenses),
+        getExpensesLeisureSum: jest.fn().mockReturnValue(leisureExpenses),
+        getExpensesEducationSum: jest.fn().mockReturnValue(educationExpenses),
+        getExpensesHealthSum: jest.fn().mockReturnValue(healthExpenses),
+        getExpensesVariousSum: jest.fn().mockReturnValue(variousExpenses)
       }
     }
   }
@@ -52,35 +70,19 @@ const wrapperFactory = (component, storeOptions) => {
 };
 
 describe('Summary', () => {
-  it('should render the username', () => {
-    wrapper = wrapperFactory(Summary, initialStore);
-    expect(wrapper.find('[data-test="name"]').text()).toContain(username);
-  });
-
-  describe('When the visitors tells us he has kids', () => {
-    it('should render the kids section', () => {
-      wrapper = wrapperFactory(Summary, initialStore);
-      expect(wrapper.find('[data-test="number-kids"]').text()).toContain(
-        numberOfKids
-      );
-    });
-  });
-
   describe('When the visitors tells us his revenues', () => {
-    it('should render the revenues section', () => {
+    it('should render the revenues.', () => {
       wrapper = wrapperFactory(Summary, initialStore);
-      expect(
-        wrapper.find('[data-test="total-monthly-household-revenues"]').text()
-      ).toContain(totalMonthlyHouseholdRevenues);
+      expect(wrapper.find('[data-test="revenues"]').text()).toContain(revenues);
     });
   });
 
-  describe('When the page has loaded', () => {
-    it('should call the setCurrentStep', () => {
+  describe('When the visitors tells us his housing expenses', () => {
+    it('should render the housing expenses.', () => {
       wrapper = wrapperFactory(Summary, initialStore);
-      expect(
-        initialStore.modules.Workflow.actions.setCurrentStep
-      ).toHaveBeenCalled();
+      expect(wrapper.find('[data-test="housing-expenses"]').text()).toContain(
+        housingExpenses
+      );
     });
   });
 });

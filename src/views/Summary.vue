@@ -1,57 +1,86 @@
 <template>
-  <section class="section">
-    <stepper />
-    <div class="columns is-centered">
-      <div class="column is-half">
-        <div class="answer" data-test="name">
-          {{ $t('summary.your-name') + username }}
-        </div>
-
-        <div class="answer" data-test="marital-status">
-          {{
-            $t('summary.your-marital-status') +
-              ($t(`analyze.${maritalStatus}`) || '')
-          }}
-        </div>
-
-        <div class="answer" v-if="hasKids" data-test="number-kids">
-          {{ $t('summary.your-kids') }} {{ numberOfKids }}
-        </div>
-
-        <div class="answer" data-test="total-monthly-household-revenues">
-          {{ $t('summary.total-monthly-household-revenues') }}
-          {{ getTotalMonthlyHouseholdRevenues }}
-        </div>
+  <span>
+    <div
+      class="columns is-centered is-mobile"
+      v-for="element in elements"
+      :key="element.label"
+    >
+      <div class="column is-3-desktop">
+        {{ element.label }}
+      </div>
+      <div class="column is-1-desktop" align="right" :data-test="element.test">
+        {{ element.value }}
       </div>
     </div>
-  </section>
+  </span>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import Stepper from '@/components/Stepper.vue';
 
 export default {
   name: 'Summary',
-  components: {
-    Stepper
-  },
   computed: {
     ...mapGetters([
-      'username',
-      'maritalStatus',
-      'hasKids',
-      'numberOfKids',
-      'getTotalMonthlyHouseholdRevenues'
-    ])
-  },
-  methods: {
-    ...mapActions(['setCurrentStep'])
-  },
-  created() {
-    this.setCurrentStep(2);
+      'getRevenuesSum',
+      'getExpensesHousingSum',
+      'getExpensesTransportSum',
+      'getExpensesInsuranceSum',
+      'getExpensesFoodSum',
+      'getExpensesLeisureSum',
+      'getExpensesEducationSum',
+      'getExpensesHealthSum',
+      'getExpensesVariousSum'
+    ]),
+    elements() {
+      return [
+        {
+          label: this.$t('commons.monthly-revenues'),
+          value: this.getRevenuesSum,
+          test: 'revenues'
+        },
+        {
+          label: this.$t('commons.monthly-expenses-housing'),
+          value: this.getExpensesHousingSum,
+          test: 'housing-expenses'
+        },
+        {
+          label: this.$t('commons.monthly-expenses-transport'),
+          value: this.getExpensesTransportSum,
+          test: 'transport-expenses'
+        },
+        {
+          label: this.$t('commons.monthly-expenses-insurance'),
+          value: this.getExpensesInsuranceSum,
+          test: 'insurance-expenses'
+        },
+        {
+          label: this.$t('commons.monthly-expenses-food'),
+          value: this.getExpensesFoodSum,
+          test: 'food-expenses'
+        },
+        {
+          label: this.$t('commons.monthly-expenses-leisure'),
+          value: this.getExpensesLeisureSum,
+          test: 'leisure-expenses'
+        },
+        {
+          label: this.$t('commons.monthly-expenses-education'),
+          value: this.getExpensesEducationSum,
+          test: 'education-expenses'
+        },
+        {
+          label: this.$t('commons.monthly-expenses-health'),
+          value: this.getExpensesHealthSum,
+          test: 'health-expenses'
+        },
+        {
+          label: this.$t('commons.monthly-expenses-various'),
+          value: this.getExpensesVariousSum,
+          test: 'various-expenses'
+        }
+      ];
+    }
   }
 };
 </script>
-
-<style lang="scss" scoped></style>

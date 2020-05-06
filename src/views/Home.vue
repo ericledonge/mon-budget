@@ -3,7 +3,7 @@
     :title="$t('homepage.title')"
     :subtitle="$t('homepage.subtitle')"
     :textButton="$t('homepage.textButton')"
-    linkButton="/analyze/step-1"
+    linkButton="/basic-info"
   />
 </template>
 

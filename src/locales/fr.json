@@ -1,17 +1,38 @@
 {
   "commons": {
-    "revenues": "Revenus",
+    "yes": "Oui",
+    "no": "Non",
+    "next": "Suivant",
     "you": "Vous",
     "partner": "Conjoint",
-    "comments": "Notes"
+    "comments": "Notes",
+    "basic-info": "Informations",
+    "revenues": "Revenus",
+    "expenses": "Dépenses",
+    "housing": "Habitation",
+    "transport": "Transports",
+    "insurance": "Assurances",
+    "food": "Alimentation",
+    "leisure": "Loisirs",
+    "education": "Éducation",
+    "health": "Santé",
+    "various": "Diverses",
+    "monthly-revenues": "Revenus mensuels",
+    "monthly-expenses-housing": "Dépenses mensuelles Habitation",
+    "monthly-expenses-transport": "Dépenses mensuelles Transports",
+    "monthly-expenses-insurance": "Dépenses mensuelles Assurances",
+    "monthly-expenses-food": "Dépenses mensuelles Alimentation",
+    "monthly-expenses-leisure": "Dépenses mensuelles Loisirs",
+    "monthly-expenses-education": "Dépenses mensuelles Éducation",
+    "monthly-expenses-health": "Dépenses mensuelles Santé et Beauté",
+    "monthly-expenses-various": "Dépenses mensuelles Diverses"
   },
   "homepage": {
     "title": "Mon Budget",
     "subtitle": "Calculer facilement votre budget en quelques clics!",
     "textButton": "Démarrer mon analyse"
   },
-  "analyze": {
-    "first-step-basic-info": "Étape 1: Informations de base",
+  "basic-info": {
     "single": "Célibataire",
     "married": "Marié(e)",
     "divorced": "Divorcé(e)",
@@ -20,27 +41,93 @@
     "what-is-your-marital-status": "Quelle est votre situation maritale?",
     "select-your-marital-status": "Sélectionnez votre situation maritale",
     "do-you-have-kids": "Avez-vous des enfants?",
-    "how-many-do-you-have-kids": "Combien d'enfants avez-vous?",
-    "yes": "Oui",
-    "no": "Non",
-    "next": "Suivant"
+    "how-many-do-you-have-kids": "Combien d'enfants avez-vous?"
   },
   "revenues": {
-    "second-step-revenues": "Étape 2 : Revenus mensuels",
     "net-salaries": "Salaires net",
     "rental-revenues": "Revenus net de locations",
-    "public-benefits": "Prestations de régimes publics (Assurance emploi, CSST, RRQ, etc.)",
-    "private-benefits": "Prestations de régimes privés (d'un régime de retraite, d'un assureur, etc.)",
+    "public-benefits": "Prestations de régimes publics",
+    "public-benefits-tooltip": "Assurance emploi, CSST, RRQ, etc.",
+    "private-benefits": "Prestations de régimes privés",
+    "private-benefits-tooltip": "Régime de retraite, Assureur, etc.)",
     "child-benefits": "Allocations pour enfants",
     "bonuses": "Bonus",
     "investment-income": "Revenus de placement",
     "other-revenues": "Autres revenus"
   },
+  "expenses": {
+    "housing": {
+      "rent-mortgage": "Loyers ou hypothèques",
+      "rent-mortgage-tooltip": "Voir section « remboursements de dettes »",
+      "electricity-heating": "Électricité et chauffage",
+      "telephone-cable-internet": "Téléphone, câble et Internet",
+      "cell": "Cellulaires",
+      "municipal-school-taxes": "Taxes municipales et scolaires",
+      "home-insurance": "Assurances habitations",
+      "condominium-fees": "Frais de copropriétés",
+      "furniture-accessories-tools": "Ameublement, accessoires, outils",
+      "other-housing-expenses": "Autres dépenses d'habitation"
+    },
+    "transport": {
+      "car-public-transport": "Automobiles et transports en commun",
+      "gasoline": "Essence",
+      "car-insurance": "Assurances automobiles",
+      "registration": "Immatriculations",
+      "driver-license": "Permis de conduire",
+      "car-rental-parking": "Locations automobiles et stationnements",
+      "other-transport-expenses": "Autres dépenses associées au transport",
+      "other car or recreational vehicle program": "CAA ou autres programmes pour auto ou VR",
+      "maintenance-and-repairs": "Entretiens et réparations"
+    },
+    "insurance": {
+      "life-insurance": "Assurances vie",
+      "child-life-insurance": "Assurances vie enfants",
+      "invalidity-insurance": "Assurances invalidité",
+      "critical-illness-insurance": "Assurances maladies graves"
+    },
+    "food": {
+      "grocery": "Épicerie",
+      "restaurants": "Restaurants",
+      "alcohol": "Alcool"
+    },
+    "leisure": {
+      "cultural-activities": "Activités culturelles",
+      "sports-activities": "Activités sportives",
+      "newspapers-magazines-music-movies": "Journaux, revues, musique et films",
+      "toys-films-game-rentals": "Jouets et location film et jeux",
+      "lotteries": "Loteries",
+      "travels": "Voyages"
+    },
+    "education": {
+      "courses-training": "Cours et formations",
+      "professional-association": "Ordres professionnels",
+      "educational-outings": "Sorties pédagogiques"
+    },
+    "health": {
+      "hairdresser": "Coiffeur",
+      "esthetician": "Esthéticienne",
+      "pharmacy": "Pharmacie",
+      "shoemaking-sewing": "Cordonnerie et coutures",
+      "psychologist": "Psychologues, massothérapeutes, chiro et orthopédistes",
+      "dentist-optometrist-others": "Dentistes, optométristes et autres",
+      "clothing": "Vêtements"
+    },
+    "various": {
+      "gifts": "Cadeaux",
+      "pets": "Animaux",
+      "tabacco": "Tabac",
+      "children-pocket-money": "Argent de poche pour enfants",
+      "bank-fees": "Frais bancaires",
+      "tax-report-lawyer-notary": "Rapports d'impôts, d'avocats et de notaires",
+      "alimony": "Pension alimentaire",
+      "childcare-fees": "Frais de garde",
+      "other-expenses": "Autres dépenses"
+    }
+  },
   "summary": {
     "title": "Sommaire",
-    "your-name": "Votre nom est: ",
-    "your-marital-status": "Votre situation est: ",
-    "your-kids": "Vous avez le nombre d'enfants suivant: ",
-    "total-monthly-household-revenues": "Vos revenus mensuels de ménage sont: "
+    "your-name": "Nom",
+    "your-marital-status": "Situation",
+    "your-kids": "Nombre d'enfants"
   }
 }

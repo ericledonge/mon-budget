@@ -1,17 +1,38 @@
 {
   "commons": {
-    "revenues": "Revenues",
+    "yes": "Yes",
+    "no": "No",
+    "next": "Next",
     "you": "You",
     "partner": "Partner",
-    "comments": "Comments"
+    "comments": "Comments",
+    "basic-info": "Informations",
+    "revenues": "Revenues",
+    "expenses": "Expenses",
+    "housing": "Housing",
+    "transport": "Transport",
+    "insurance": "Insurance",
+    "food": "Food",
+    "leisure": "Leisure",
+    "education": "Education",
+    "health": "Healthcare",
+    "various": "Various",
+    "monthly-revenues": "Monthly Revenues",
+    "monthly-expenses-housing": "Monthly Housing Expenses",
+    "monthly-expenses-transport": "Monthly Transport Expenses",
+    "monthly-expenses-insurance": "Monthly Insurance Expenses",
+    "monthly-expenses-food": "Monthly Food Expenses",
+    "monthly-expenses-leisure": "Monthly Leisure Expenses",
+    "monthly-expenses-education": "Monthly Education Expenses",
+    "monthly-expenses-health": "Monthly Health Beauty Care Expenses",
+    "monthly-expenses-various": "Monthly Various Expenses"
   },
   "homepage": {
     "title": "My Budget",
     "subtitle": "Easily calculate your budget in just a few clicks!",
     "textButton": "Start my analysis"
   },
-  "analyze": {
-    "first-step-basic-info": "Step 1: Basic information",
+  "basic-info": {
     "single": "Single",
     "married": "Married",
     "divorced": "Divorced",
@@ -20,13 +41,9 @@
     "what-is-your-marital-status": "What is your marital status?",
     "select-your-marital-status": "Select your marital status",
     "do-you-have-kids": "Do you have kids?",
-    "how-many-do-you-have-kids": "How many kids do you have?",
-    "yes": "Yes",
-    "no": "No",
-    "next": "Next"
+    "how-many-do-you-have-kids": "How many kids do you have?"
   },
   "revenues": {
-    "second-step-revenues": "Step 2: Monthly revenues",
     "net-salaries": "Net salaries",
     "rental-revenues": "Rental net revenues",
     "public-benefits": "Public benefits",
@@ -36,11 +53,78 @@
     "investment-income": "Investment income",
     "other-revenues": "Other revenues"
   },
+  "expenses": {
+    "housing": {
+      "rent-mortgage": "Rents and mortgages",
+      "electricity-heating": "electricity-heating",
+      "telephone-cable-internet": "telephone-cable-internet",
+      "cell": "cell",
+      "municipal-school-taxes": "municipal-school-taxes",
+      "home-insurance": "home-insurance",
+      "condominium-fees": "condominium-fee",
+      "furniture-accessories-tools": "furniture-accessories-tools",
+      "other-housing-expenses": "other-housing-expenses"
+    },
+    "transport": {
+      "car-public-transport": "car-public-transport",
+      "gasoline": "gasoline",
+      "car-insurance": "car-insurance",
+      "registration": "registration",
+      "driver-license": "driver-license",
+      "car-rental-parking": "car-rental-parking",
+      "other-transport-expenses": "other-transport-expenses",
+      "other car or recreational vehicle program": "other car or recreational vehicle program",
+      "maintenance-and-repairs": "maintenance-and-repairs"
+    },
+    "insurance": {
+      "life-insurance": "life-insurance",
+      "child-life-insurance": "child-life-insurance",
+      "invalidity-insurance": "invalidity-insurance",
+      "critical-illness-insurance": "critical-illness-insurance"
+    },
+    "food": {
+      "grocery": "grocery",
+      "restaurants": "restaurants",
+      "alcohol": "alcohol"
+    },
+    "leisure": {
+      "cultural-activities": "cultural-activities",
+      "sports-activities": "sports-activities",
+      "newspapers-magazines-music-movies": "newspapers-magazines-music-movies",
+      "toys-films-game-rentals": "toys-films-game-rentals",
+      "lotteries": "lotteries",
+      "travels": "travels"
+    },
+    "education": {
+      "courses-training": "courses-training",
+      "professional-association": "professional-association",
+      "educational-outings": "educational-outings"
+    },
+    "health": {
+      "hairdresser": "hairdresser",
+      "esthetician": "esthetician",
+      "pharmacy": "pharmacy",
+      "shoemaking-sewing": "shoemaking-sewing",
+      "psychologist": "psychologist",
+      "dentist-optometrist-others": "dentist-optometrist-others",
+      "clothing": "clothing"
+    },
+    "various": {
+      "gifts": "gifts",
+      "pets": "pets",
+      "tabacco": "tabacco",
+      "children-pocket-money": "children-pocket-money",
+      "bank-fees": "bank-fees",
+      "tax-report-lawyer-notary": "tax-report-lawyer-notary",
+      "alimony": "alimony",
+      "childcare-fees": "childcare-fees",
+      "other-expenses": "other-expenses"
+    }
+  },
   "summary": {
     "title": "Summary",
-    "your-name": "Your name is: ",
-    "your-marital-status": "Your situation is: ",
-    "your-kids": "You have the following number of children: ",
-    "total-monthly-household-revenues": "Your total monthly household revenues are: "
+    "your-name": "Name",
+    "your-marital-status": "Situation",
+    "your-kids": "Children"
   }
 }

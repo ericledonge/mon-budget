@@ -1,6 +1,6 @@
-describe('Analyze-Step-1', () => {
+describe('Basic Info', () => {
   beforeEach(() => {
-    cy.visit('/analyze/step-1');
+    cy.visit('/basic-info');
   });
 
   describe('When a visitor arrives on the app', () => {
@@ -45,9 +45,9 @@ describe('Analyze-Step-1', () => {
     it('should be able to go to the next questions', () => {
       cy.get('.button').should('not.be.disabled');
     });
-    it('should be redirected to the Analyze step 2 page', () => {
+    it('should be redirected to the Revenues page', () => {
       cy.get('.button').click();
-      cy.url().should('include', '/analyze/step-2');
+      cy.url().should('include', '/revenues');
     });
   });
 });

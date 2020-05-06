@@ -28,6 +28,16 @@ import App from './App.vue';
 
 Vue.use(Vuex);
 
+import WorkflowLayout from '@/layouts/WorkflowLayout.vue';
+import DefaultLayout from '@/layouts/DefaultLayout.vue';
+import MoneyInput from '@/components/MoneyInput.vue';
+import FormHeader from '@/components/FormHeader.vue';
+
+Vue.component('workflow-layout', WorkflowLayout);
+Vue.component('default-layout', DefaultLayout);
+Vue.component('money-input', MoneyInput);
+Vue.component('form-header', FormHeader);
+
 const store = new Vuex.Store(storeConfig);
 
 Vue.config.productionTip = false;

@@ -4,6 +4,7 @@
     :has-navigation="false"
     :animated="true"
     :rounded="true"
+    size="is-small"
   >
     <template v-for="(step, index) in getAllSteps">
       <b-step-item

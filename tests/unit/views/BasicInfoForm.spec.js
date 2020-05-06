@@ -1,10 +1,14 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
+import VueRouter from 'vue-router';
 import Vuelidate from 'vuelidate';
-import AnalyzeStep1 from '@/views/AnalyzeStep1.vue';
+import BasicInfoForm from '@/views/BasicInfoForm.vue';
 
 const localVue = createLocalVue();
+const router = new VueRouter();
+
 localVue.use(Vuex);
+localVue.use(VueRouter);
 localVue.use(Vuelidate);
 
 let wrapper;
@@ -14,7 +18,6 @@ let initialStore;
 let name = 'Toto';
 let maritalStatus = 'Divorced';
 let hasKids = true;
-let numberOfKids = 2;
 
 initialStore = {
   modules: {
@@ -25,7 +28,7 @@ initialStore = {
     },
     Workflow: {
       actions: {
-        setCurrentStep: jest.fn()
+        incrementStep: jest.fn()
       }
     }
   }
@@ -36,11 +39,11 @@ const wrapperFactory = (component, storeOptions) => {
   wrapper = new shallowMount(component, {
     localVue,
     store,
+    router,
     mocks: {
       $t: () => {}
     },
     stubs: [
-      'router-link',
       'b-button',
       'b-radio',
       'b-field',
@@ -52,13 +55,10 @@ const wrapperFactory = (component, storeOptions) => {
   return wrapper;
 };
 
-describe('AnalyzeStep1', () => {
+describe('BasicInfoForm', () => {
   describe('Until the form is completed', () => {
-    beforeAll(() => {
-      wrapper = wrapperFactory(AnalyzeStep1, initialStore);
-    });
-
     it('should not be possible to continue to the next step', () => {
+      wrapper = wrapperFactory(BasicInfoForm, initialStore);
       expect(
         wrapper.find('[data-test="button-next"]').attributes('disabled')
       ).toEqual('true');
@@ -66,12 +66,10 @@ describe('AnalyzeStep1', () => {
   });
 
   describe('When the form is completed', () => {
-    beforeAll(() => {
-      wrapper = wrapperFactory(AnalyzeStep1, initialStore);
+    it('should be possible to continue to the next step', async () => {
+      wrapper = wrapperFactory(BasicInfoForm, initialStore);
       wrapper.setData({ maritalStatus, hasKids, name });
-    });
-
-    it('should be possible to continue to the next step', () => {
+      await wrapper.vm.$nextTick();
       expect(
         wrapper.find('[data-test="button-next"]').attributes('disabled')
       ).toBe(undefined);
@@ -79,44 +77,32 @@ describe('AnalyzeStep1', () => {
   });
 
   describe('When the visitor told he/she has no kid', () => {
-    beforeAll(() => {
-      wrapper = wrapperFactory(AnalyzeStep1, initialStore);
+    it('should not be able to select how many he/she has', async () => {
+      wrapper = wrapperFactory(BasicInfoForm, initialStore);
       wrapper.setData({ hasKids: false });
-    });
-    it('should not be able to select how many he/she has', () => {
+      await wrapper.vm.$nextTick();
       expect(wrapper.find('[data-test="number-kids"]').exists()).toBe(false);
     });
   });
 
   describe('When the visitor told he/she has kids', () => {
-    beforeAll(() => {
-      wrapper = wrapperFactory(AnalyzeStep1, initialStore);
+    it('should be able to select how many he/she has', async () => {
+      wrapper = wrapperFactory(BasicInfoForm, initialStore);
       wrapper.setData({ hasKids });
-    });
-    it('should be able to select how many he/she has', () => {
+      await wrapper.vm.$nextTick();
       expect(wrapper.find('[data-test="number-kids"]').exists()).toBe(true);
     });
   });
 
+  // To fix
   describe('When the visitor submits the basic info form', () => {
-    beforeAll(() => {
-      wrapper = wrapperFactory(AnalyzeStep1, initialStore);
-      wrapper.setData({ maritalStatus, hasKids, name });
-    });
     it('should call the addBasicInfo action', async () => {
+      wrapper = wrapperFactory(BasicInfoForm, initialStore);
+      wrapper.setData({ maritalStatus, hasKids, name });
       wrapper.find('[data-test="button-next"]').trigger('click');
       await wrapper.vm.$nextTick();
       expect(
         initialStore.modules.BasicInfo.actions.addBasicInfo
-      ).toHaveBeenCalled();
-    });
-  });
-
-  describe('When the page has loaded', () => {
-    it('should call the setCurrentStep', () => {
-      wrapper = wrapperFactory(AnalyzeStep1, initialStore);
-      expect(
-        initialStore.modules.Workflow.actions.setCurrentStep
       ).toHaveBeenCalled();
     });
   });

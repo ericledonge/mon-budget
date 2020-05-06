@@ -1,7 +1,7 @@
 <template>
   <div class="question">
     <b-field :label="title">
-      <slot></slot>
+      <slot />
     </b-field>
   </div>
 </template>
@@ -18,5 +18,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped></style>
