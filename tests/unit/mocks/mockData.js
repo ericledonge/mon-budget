@@ -18,7 +18,34 @@ export function FAKE_AMOUNT_ANSWERS() {
 }
 
 export const FAKE_STEPS = [
-  { label: 'Step 1 - label', content: 'Step 1 - content', displayed: true },
-  { label: 'Step 2 - label', content: 'Step 2 - content', displayed: true },
-  { label: 'Step 3 - label', content: 'Step 3 - content', displayed: true }
+  {
+    id: 2,
+    active: false,
+    item: 'housing',
+    label: 'commons.housing',
+    icon: 'home',
+    subItemsGetter: 'getExpensesHousingItems',
+    updateAction: 'addExpensesHousing',
+    link: '/expenses/housing'
+  },
+  {
+    id: 3,
+    active: true,
+    item: 'transport',
+    label: 'commons.transport',
+    icon: 'bus',
+    subItemsGetter: 'getExpensesTransportItems',
+    updateAction: 'addExpensesTransport',
+    link: '/expenses/transport'
+  },
+  {
+    id: 4,
+    active: false,
+    item: 'insurance',
+    label: 'commons.insurance',
+    icon: 'car-crash',
+    subItemsGetter: 'getExpensesInsuranceItems',
+    updateAction: 'addExpensesInsurance',
+    link: '/expenses/insurance'
+  }
 ];

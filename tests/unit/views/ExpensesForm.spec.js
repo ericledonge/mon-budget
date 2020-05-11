@@ -2,53 +2,48 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import ExpensesForm from '@/views/ExpensesForm.vue';
-import { FAKE_ANSWERS } from '../mocks/mockData';
+import { FAKE_STEPS, FAKE_ANSWERS } from '../mocks/mockData';
 
 const localVue = createLocalVue();
-const router = new VueRouter();
-
 localVue.use(Vuex);
 localVue.use(VueRouter);
 
 let wrapper;
+let router;
 let store = {};
 let initialStore = {
   modules: {
     Expenses: {
       getters: {
-        getExpensesHousingItems: jest.fn().mockReturnValue(FAKE_ANSWERS)
+        getExpensesTransportItems: jest.fn().mockReturnValue(FAKE_ANSWERS)
       },
       actions: {
-        addExpensesHousing: jest.fn()
+        addExpensesTransport: jest.fn()
       }
     },
     Workflow: {
+      getters: {
+        getActiveStep: jest.fn().mockReturnValue(FAKE_STEPS[1]),
+        getNextStepLink: jest.fn().mockReturnValue(FAKE_STEPS[1].item)
+      },
       actions: {
-        incrementStep: jest.fn()
+        setActiveStep: jest.fn()
       }
     }
   }
 };
-let $route = { path: '/some/path' };
-let props = {
-  topic: 'housing',
-  dataItems: 'getExpensesHousingItems',
-  action: 'addExpensesHousing',
-  url: '/expenses/transport'
-};
 
 const wrapperFactory = (component, storeOptions) => {
   store = new Vuex.Store({ ...storeOptions });
+  router = new VueRouter();
   wrapper = new shallowMount(component, {
     localVue,
     store,
     router,
-    propsData: props,
     mocks: {
       $t: () => {}
     },
     stubs: [
-      'router-link',
       'b-button',
       'b-input',
       'b-select',
@@ -69,13 +64,25 @@ describe('ExpensesForm', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  it('should render n lines for n expenses items', () => {
-    expect(wrapper.findAll('[data-test="housing-item"]').length).toEqual(
-      FAKE_ANSWERS.length
-    );
+  it('should render the title', () => {
+    const actualTitle = wrapper.find('[data-test="title"]').html();
+    expect(actualTitle).toContain(FAKE_STEPS[1].item);
   });
 
-  it('should render n items for n expenses items', () => {
-    expect(wrapper.vm.items.length).toEqual(FAKE_ANSWERS.length);
+  it('should render n lines for n expenses items', () => {
+    const itemName = FAKE_STEPS[1].item;
+    const subItemLines = wrapper.findAll(`[data-test="${itemName}-item"]`)
+      .length;
+    expect(subItemLines).toEqual(FAKE_ANSWERS.length);
+  });
+
+  describe('When the visitor submits the form', () => {
+    it('should call the update data action', async () => {
+      wrapper.find('[data-test="button-next"]').trigger('click');
+      await wrapper.vm.$nextTick();
+      expect(
+        initialStore.modules.Expenses.actions.addExpensesTransport
+      ).toHaveBeenCalled();
+    });
   });
 });

@@ -93,11 +93,10 @@ describe('Store', () => {
       });
     });
 
-    describe('setCurrentStep - When the user goes to the next step', () => {
-      it('should update his current step in the workflow', async () => {
-        const stepNumber = 3;
-        await store.dispatch('setCurrentStep', stepNumber);
-        expect(store.getters['getCurrentStep']).toEqual(stepNumber);
+    describe('setActiveStep - When the user goes to the next step', () => {
+      it('should set the active step', async () => {
+        await store.dispatch('setActiveStep', 'transport');
+        expect(store.getters.getActiveStep.item).toEqual('transport');
       });
     });
   });

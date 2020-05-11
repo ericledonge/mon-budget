@@ -1,50 +1,81 @@
 import Workflow from '@/store/modules/Workflow.module';
 import { FAKE_STEPS } from '../../mocks/mockData.js';
+import cloneDeep from 'lodash.clonedeep';
 
 let state;
 let commit;
 
-describe('Workflow Module', () => {
-  beforeEach(() => {
-    state = {
-      steps: FAKE_STEPS,
-      currentStep: 0
-    };
-  });
+const initialState = {
+  steps: FAKE_STEPS
+};
 
+const stateFactory = initialState => {
+  return (state = cloneDeep(initialState));
+};
+
+describe('Workflow Module', () => {
   describe('Getters', () => {
     describe('getAllSteps', () => {
       it('should return the list of all the steps', () => {
+        state = stateFactory(initialState);
         const actual = Workflow.getters.getAllSteps(state);
         expect(actual).toEqual(FAKE_STEPS);
       });
     });
-    describe('getCurrentStep', () => {
-      it('should return the current step.', () => {
-        const actual = Workflow.getters.getCurrentStep(state);
-        expect(actual).toEqual(0);
+    describe('getActiveStep', () => {
+      it('should return the active step', () => {
+        state = stateFactory(initialState);
+        const activeStep = Workflow.getters.getActiveStep(state);
+        expect(activeStep.item).toEqual('transport');
+      });
+    });
+    describe('getNextStepLink', () => {
+      it('should return next step link', () => {
+        state = stateFactory(initialState);
+        let getActiveStep = state.steps.find(step => step.active);
+        const nextStepLink = Workflow.getters.getNextStepLink(state, {
+          getActiveStep
+        });
+        expect(nextStepLink).toEqual('/expenses/insurance');
+      });
+      describe('When there is no next step', () => {
+        it('should return an empty string', () => {
+          state = stateFactory(initialState);
+          Workflow.mutations.SET_ACTIVE_STEP(state, 'insurance');
+          let getActiveStep = state.steps.find(step => step.active);
+          const nextStepLink = Workflow.getters.getNextStepLink(state, {
+            getActiveStep
+          });
+          expect(nextStepLink).toEqual('');
+        });
       });
     });
   });
 
   describe('Mutations', () => {
-    describe('SET_CURRENT_STEP', () => {
-      it('should set the current step.', () => {
-        const stepNumber = 1;
-        Workflow.mutations.SET_CURRENT_STEP(state, stepNumber);
-        const actual = Workflow.getters.getCurrentStep(state);
-        expect(actual).toEqual(stepNumber);
+    describe('SET_ACTIVE_STEP', () => {
+      it('should set the active step', () => {
+        state = stateFactory(initialState);
+        Workflow.mutations.SET_ACTIVE_STEP(state, 'insurance');
+        const activeStepActiveItem = state.steps.find(step => step.active).item;
+        expect(activeStepActiveItem).toEqual('insurance');
+      });
+      it('should exist only one unique active step', () => {
+        state = stateFactory(initialState);
+        Workflow.mutations.SET_ACTIVE_STEP(state, 'insurance');
+        const activeStepsActiveNumber = state.steps.filter(step => step.active);
+        expect(activeStepsActiveNumber.length).toEqual(1);
       });
     });
   });
 
   describe('Actions', () => {
-    describe('setCurrentStep', () => {
-      it('should set the current step.', async () => {
-        let stepNumber = 2;
+    describe('setActiveStep', () => {
+      it('should set the active step', async () => {
+        state = stateFactory(initialState);
         commit = jest.fn();
-        await Workflow.actions.setCurrentStep({ commit }, stepNumber);
-        expect(commit).toHaveBeenCalledWith('SET_CURRENT_STEP', stepNumber);
+        await Workflow.actions.setActiveStep({ commit }, 'insurance');
+        expect(commit).toBeCalledWith('SET_ACTIVE_STEP', 'insurance');
       });
     });
   });

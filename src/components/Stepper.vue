@@ -1,6 +1,6 @@
 <template>
   <b-steps
-    v-model="getCurrentStep"
+    v-model="getActiveStep.id"
     :has-navigation="false"
     :animated="true"
     :rounded="true"
@@ -24,7 +24,7 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'Stepper',
   computed: {
-    ...mapGetters(['getAllSteps', 'getCurrentStep'])
+    ...mapGetters(['getAllSteps', 'getActiveStep'])
   },
   props: ['icon']
 };

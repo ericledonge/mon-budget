@@ -1,27 +1,30 @@
 <template>
   <span>
-    <form-header :title="`monthly-expenses-${topic}`" />
+    <form-header
+      :title="`monthly-expenses-${currentStepItem}`"
+      data-test="title"
+    />
 
     <div
       class="columns is-centered is-mobile"
-      :data-test="`${topic}-item`"
-      v-for="(question, index) in questions"
-      :key="question.name"
+      :data-test="`${currentStepItem}-item`"
+      v-for="(subItem, index) in currentStepSubItems"
+      :key="subItem.name"
     >
       <div
         class="column is-3-desktop is-one-third-mobile"
-        :data-test="question.name"
+        :data-test="subItem.name"
       >
-        {{ $t(`expenses.${topic}.${question.name}`) }}
+        {{ $t(`expenses.${currentStepItem}.${subItem.name}`) }}
       </div>
       <div class="column is-1-desktop">
-        <money-input v-model="items[index].user" />
+        <money-input v-model="answers[index].user" />
       </div>
       <div class="column is-1-desktop">
-        <money-input v-model="items[index].partner" />
+        <money-input v-model="answers[index].partner" />
       </div>
       <div class="column is-2-desktop">
-        <b-input v-model="items[index].comments" size="is-small" />
+        <b-input v-model="answers[index].comments" size="is-small" />
       </div>
     </div>
 
@@ -40,47 +43,48 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import cloneDeep from 'lodash.clonedeep';
 
 export default {
   name: 'ExpensesForm',
-  props: {
-    topic: {
-      type: String,
-      required: true
-    },
-    dataItems: {
-      type: String,
-      required: true
-    },
-    action: {
-      type: String,
-      required: true
-    },
-    url: {
-      type: String,
-      required: true
+  created() {
+    this.setActiveStep(this.currentRoute);
+  },
+  watch: {
+    $route(to, from) {
+      this.setActiveStep(this.currentRoute);
     }
   },
   computed: {
-    items: {
+    ...mapGetters(['getActiveStep', 'getNextStepLink']),
+    currentRoute() {
+      return this.$route.params.item;
+    },
+    currentStepItem() {
+      return this.getActiveStep.item;
+    },
+    currentStepSubItems() {
+      return this.$store.getters[this.getActiveStep.subItemsGetter];
+    },
+    currentStepAction() {
+      return this.getActiveStep.updateAction;
+    },
+    nextStepLink() {
+      return this.getNextStepLink;
+    },
+    answers: {
       get() {
-        return cloneDeep(this.questions);
+        return cloneDeep(this.currentStepSubItems);
       },
       set() {}
-    },
-    questions() {
-      return this.$store.getters[`${this.dataItems}`];
     }
   },
   methods: {
-    ...mapActions(['incrementStep']),
+    ...mapActions(['setActiveStep']),
     submit() {
-      this.$store.dispatch(`${this.action}`, this.items);
-      this.items = null;
-      this.incrementStep();
-      this.$router.push(this.url);
+      this.$store.dispatch(this.currentStepAction, this.answers);
+      this.$router.push(this.nextStepLink);
     }
   }
 };

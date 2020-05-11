@@ -81,6 +81,12 @@ export default {
         }
       ];
     }
+  },
+  methods: {
+    ...mapActions(['setActiveStep'])
+  },
+  created() {
+    this.setActiveStep('summary');
   }
 };
 </script>

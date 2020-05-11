@@ -51,17 +51,20 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getRevenuesItems'])
+    ...mapGetters(['getRevenuesItems']),
+    currentRoute() {
+      return this.$route.params.item;
+    }
   },
   methods: {
-    ...mapActions(['addRevenues', 'incrementStep']),
+    ...mapActions(['addRevenues', 'setActiveStep']),
     submit() {
       this.addRevenues(this.items);
-      this.incrementStep();
       this.$router.push('/expenses/housing');
     }
   },
   created() {
+    this.setActiveStep('revenues');
     this.items = cloneDeep(this.getRevenuesItems);
   }
 };

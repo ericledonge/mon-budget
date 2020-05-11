@@ -3,84 +3,133 @@ export default {
     steps: [
       {
         id: 0,
+        active: true,
+        item: 'basic-info',
         label: 'commons.basic-info',
         icon: 'user-circle'
       },
       {
         id: 1,
+        active: false,
+        item: 'revenues',
         label: 'commons.revenues',
         icon: 'money-bill-alt'
       },
       {
         id: 2,
+        active: false,
+        item: 'housing',
         label: 'commons.housing',
-        icon: 'home'
+        icon: 'home',
+        subItemsGetter: 'getExpensesHousingItems',
+        updateAction: 'addExpensesHousing',
+        link: '/expenses/housing'
       },
       {
         id: 3,
+        active: false,
+        item: 'transport',
         label: 'commons.transport',
-        icon: 'bus'
+        icon: 'bus',
+        subItemsGetter: 'getExpensesTransportItems',
+        updateAction: 'addExpensesTransport',
+        link: '/expenses/transport'
       },
       {
         id: 4,
+        active: false,
+        item: 'insurance',
         label: 'commons.insurance',
-        icon: 'car-crash'
+        icon: 'car-crash',
+        subItemsGetter: 'getExpensesInsuranceItems',
+        updateAction: 'addExpensesInsurance',
+        link: '/expenses/insurance'
       },
       {
         id: 5,
+        active: false,
+        item: 'food',
         label: 'commons.food',
-        icon: 'utensils'
+        icon: 'utensils',
+        subItemsGetter: 'getExpensesFoodItems',
+        updateAction: 'addExpensesFood',
+        link: '/expenses/food'
       },
       {
         id: 6,
+        active: false,
+        item: 'leisure',
         label: 'commons.leisure',
-        icon: 'theater-masks'
+        icon: 'theater-masks',
+        subItemsGetter: 'getExpensesLeisureItems',
+        updateAction: 'addExpensesLeisure',
+        link: '/expenses/leisure'
       },
       {
         id: 7,
+        active: false,
+        item: 'education',
         label: 'commons.education',
-        icon: 'graduation-cap'
+        icon: 'graduation-cap',
+        subItemsGetter: 'getExpensesEducationItems',
+        updateAction: 'addExpensesEducation',
+        link: '/expenses/education'
       },
       {
         id: 8,
+        active: false,
+        item: 'health',
         label: 'commons.health',
-        icon: 'first-aid'
+        icon: 'first-aid',
+        subItemsGetter: 'getExpensesHealthItems',
+        updateAction: 'addExpensesHealth',
+        link: '/expenses/health'
       },
       {
         id: 9,
+        active: false,
+        item: 'various',
         label: 'commons.various',
-        icon: 'plus'
+        icon: 'plus',
+        subItemsGetter: 'getExpensesVariousItems',
+        updateAction: 'addExpensesVarious',
+        link: '/expenses/various'
       },
       {
         id: 10,
+        active: false,
+        item: 'summary',
         label: 'summary.title',
-        icon: 'chart-bar'
+        icon: 'chart-bar',
+        link: '/summary'
       }
-    ],
-    currentStep: 0
+    ]
   },
   getters: {
     getAllSteps: state => {
       return state.steps;
     },
-    getCurrentStep: state => {
-      return state.currentStep;
+    getActiveStep: state => {
+      return state.steps.find(step => step.active);
+    },
+    getNextStepLink: (state, getters) => {
+      const nextStep = state.steps.find(
+        step => step.id === getters.getActiveStep.id + 1
+      );
+      return nextStep ? nextStep.link : '';
     }
   },
   mutations: {
-    SET_CURRENT_STEP: (state, stepNumber) => {
-      state.currentStep = stepNumber;
-    },
-    INCREMENT_STEP: state => {
-      state.currentStep++;
+    SET_ACTIVE_STEP: (state, activeStepItem) => {
+      state.steps = state.steps.map(step => ({
+        ...step,
+        active: step.item === activeStepItem
+      }));
     }
   },
   actions: {
-    setCurrentStep: ({ commit }, stepNumber) => {
-      commit('SET_CURRENT_STEP', stepNumber);
-    },
-    incrementStep: ({ commit }) => {
-      commit('INCREMENT_STEP');
+    setActiveStep: ({ commit }, activeStepItem) => {
+      commit('SET_ACTIVE_STEP', activeStepItem);
     }
   }
 };

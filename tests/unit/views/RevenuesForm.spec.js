@@ -24,7 +24,7 @@ let initialStore = {
     },
     Workflow: {
       actions: {
-        incrementStep: jest.fn()
+        setActiveStep: jest.fn()
       }
     }
   }

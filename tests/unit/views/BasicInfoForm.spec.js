@@ -28,7 +28,7 @@ initialStore = {
     },
     Workflow: {
       actions: {
-        incrementStep: jest.fn()
+        setActiveStep: jest.fn()
       }
     }
   }
@@ -94,7 +94,6 @@ describe('BasicInfoForm', () => {
     });
   });
 
-  // To fix
   describe('When the visitor submits the basic info form', () => {
     it('should call the addBasicInfo action', async () => {
       wrapper = wrapperFactory(BasicInfoForm, initialStore);

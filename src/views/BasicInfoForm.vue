@@ -81,6 +81,9 @@ export default {
   components: {
     Question
   },
+  created() {
+    this.setActiveStep('basic-info');
+  },
   data() {
     return {
       name: null,
@@ -104,7 +107,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['addBasicInfo', 'incrementStep']),
+    ...mapActions(['addBasicInfo', 'setActiveStep']),
     submit() {
       this.$v.$touch();
       if (!this.$v.$invalid) {
@@ -114,7 +117,6 @@ export default {
           hasKids: this.hasKids,
           numberOfKids: this.numberOfKids
         });
-        this.incrementStep();
         this.$router.push('/revenues');
       }
     }

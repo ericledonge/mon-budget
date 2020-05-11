@@ -21,15 +21,6 @@ let leisureExpenses = 312;
 let educationExpenses = 83;
 let healthExpenses = 243;
 let variousExpenses = 356;
-let sumExpenses =
-  housingExpenses +
-  transportExpenses +
-  insuranceExpenses +
-  foodExpenses +
-  leisureExpenses +
-  educationExpenses +
-  healthExpenses +
-  variousExpenses;
 
 let initialStore = {
   modules: {
@@ -52,6 +43,11 @@ let initialStore = {
         getExpensesEducationSum: jest.fn().mockReturnValue(educationExpenses),
         getExpensesHealthSum: jest.fn().mockReturnValue(healthExpenses),
         getExpensesVariousSum: jest.fn().mockReturnValue(variousExpenses)
+      }
+    },
+    Workflow: {
+      actions: {
+        setActiveStep: jest.fn()
       }
     }
   }

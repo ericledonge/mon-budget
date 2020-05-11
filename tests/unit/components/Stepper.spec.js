@@ -6,8 +6,6 @@ import { FAKE_STEPS } from '../mocks/mockData';
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
-let currentStep = 0;
-
 let wrapper;
 let store = {};
 let initialStore = {
@@ -15,10 +13,7 @@ let initialStore = {
     workflow: {
       getters: {
         getAllSteps: jest.fn().mockReturnValue(FAKE_STEPS),
-        getCurrentStep: jest.fn().mockReturnValue(currentStep)
-      },
-      actions: {
-        setCurrentStep: jest.fn()
+        getActiveStep: jest.fn().mockReturnValue(FAKE_STEPS[1])
       }
     }
   }
