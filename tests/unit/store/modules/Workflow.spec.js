@@ -50,6 +50,13 @@ describe('Workflow Module', () => {
         });
       });
     });
+    describe('getStepById', () => {
+      it('should return the corresponding step', () => {
+        state = stateFactory(initialState);
+        let step = Workflow.getters.getStepById(state)(FAKE_STEPS[2].id);
+        expect(step.id).toEqual(FAKE_STEPS[2].id);
+      });
+    });
   });
 
   describe('Mutations', () => {

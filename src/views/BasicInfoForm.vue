@@ -73,7 +73,7 @@
 
 <script>
 import { required } from 'vuelidate/lib/validators';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import Question from '@/components/Question.vue';
 
 export default {
@@ -83,6 +83,10 @@ export default {
   },
   created() {
     this.setActiveStep('basic-info');
+    this.name = this.basicInfo.name;
+    this.maritalStatus = this.basicInfo.maritalStatus;
+    this.hasKids = this.basicInfo.hasKids;
+    this.numberOfKids = this.basicInfo.numberOfKids;
   },
   data() {
     return {
@@ -120,6 +124,9 @@ export default {
         this.$router.push('/revenues');
       }
     }
+  },
+  computed: {
+    ...mapGetters(['basicInfo'])
   }
 };
 </script>

@@ -19,7 +19,7 @@ export function FAKE_AMOUNT_ANSWERS() {
 
 export const FAKE_STEPS = [
   {
-    id: 2,
+    id: 0,
     active: false,
     item: 'housing',
     label: 'commons.housing',
@@ -29,7 +29,7 @@ export const FAKE_STEPS = [
     link: '/expenses/housing'
   },
   {
-    id: 3,
+    id: 1,
     active: true,
     item: 'transport',
     label: 'commons.transport',
@@ -39,7 +39,7 @@ export const FAKE_STEPS = [
     link: '/expenses/transport'
   },
   {
-    id: 4,
+    id: 2,
     active: false,
     item: 'insurance',
     label: 'commons.insurance',

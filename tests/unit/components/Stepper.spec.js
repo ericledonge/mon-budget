@@ -43,4 +43,20 @@ describe('Stepper', () => {
     const steps = wrapper.findAll('[data-test="step"]');
     expect(steps.length).toEqual(FAKE_STEPS.length);
   });
+
+  describe('When a visitor has already filled in a step', () => {
+    it('should be able to click on it to go back to this step', () => {
+      wrapper = wrapperFactory(Stepper, initialStore);
+      const firstStep = wrapper.find('[data-test="step"]');
+      expect(firstStep.attributes('clickable')).toEqual('true');
+    });
+  });
+
+  describe('When a visitor has not already filled in a step', () => {
+    it('should not be able to click on it', () => {
+      wrapper = wrapperFactory(Stepper, initialStore);
+      const thirdStep = wrapper.findAll('[data-test="step"]').at(2);
+      expect(thirdStep.attributes('clickable')).toBeUndefined();
+    });
+  });
 });

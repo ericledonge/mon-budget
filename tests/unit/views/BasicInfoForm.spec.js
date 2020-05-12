@@ -13,15 +13,22 @@ localVue.use(Vuelidate);
 
 let wrapper;
 let store;
-let initialStore;
 
 let name = 'Toto';
 let maritalStatus = 'Divorced';
 let hasKids = true;
 
-initialStore = {
+let initialStore = {
   modules: {
     BasicInfo: {
+      getters: {
+        basicInfo: jest.fn().mockReturnValue({
+          name: null,
+          maritalStatus: null,
+          hasKids: false,
+          numberOfKids: 0
+        })
+      },
       actions: {
         addBasicInfo: jest.fn()
       }

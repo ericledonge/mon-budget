@@ -6,14 +6,16 @@ export default {
         active: true,
         item: 'basic-info',
         label: 'commons.basic-info',
-        icon: 'user-circle'
+        icon: 'user-circle',
+        link: '/basic-info'
       },
       {
         id: 1,
         active: false,
         item: 'revenues',
         label: 'commons.revenues',
-        icon: 'money-bill-alt'
+        icon: 'money-bill-alt',
+        link: '/revenues'
       },
       {
         id: 2,
@@ -117,6 +119,9 @@ export default {
         step => step.id === getters.getActiveStep.id + 1
       );
       return nextStep ? nextStep.link : '';
+    },
+    getStepById: state => id => {
+      return state.steps.find(step => step.id === id);
     }
   },
   mutations: {
