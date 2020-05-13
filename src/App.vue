@@ -83,11 +83,7 @@ $section-padding: 1.5rem 0.75rem;
 @import '~bulma';
 @import '~buefy/src/scss/buefy';
 
-.question:not(:first) {
-  padding-top: 2rem;
-}
-
-.answer {
-  padding-top: 2rem;
+.question:not(:first-child) {
+  padding-top: 1.5rem;
 }
 </style>

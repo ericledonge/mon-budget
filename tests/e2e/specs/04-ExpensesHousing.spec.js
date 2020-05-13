@@ -11,13 +11,28 @@ describe('ExpensesHousing', () => {
     });
     it('should be able to read his results in the summary', () => {
       cy.get('[data-test="button-next"]').click();
+
+      cy.get('[data-test="car-public-transport"]', { timeout: 2000 });
       cy.get('[data-test="button-next"]').click();
+
+      cy.get('[data-test="life-insurance"]', { timeout: 2000 });
       cy.get('[data-test="button-next"]').click();
+
+      cy.get('[data-test="grocery"]', { timeout: 2000 });
       cy.get('[data-test="button-next"]').click();
+
+      cy.get('[data-test="travels"]', { timeout: 2000 });
       cy.get('[data-test="button-next"]').click();
+
+      cy.get('[data-test="professional-association"]', { timeout: 2000 });
       cy.get('[data-test="button-next"]').click();
+
+      cy.get('[data-test="hairdresser"]', { timeout: 2000 });
       cy.get('[data-test="button-next"]').click();
+
+      cy.get('[data-test="gifts"]', { timeout: 2000 });
       cy.get('[data-test="button-next"]').click();
+
       cy.get('[data-test="housing-expenses"]').contains(1850);
     });
   });

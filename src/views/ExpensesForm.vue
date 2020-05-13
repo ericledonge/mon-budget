@@ -51,11 +51,6 @@ export default {
   created() {
     this.setActiveStep(this.currentRoute);
   },
-  watch: {
-    $route(to, from) {
-      this.setActiveStep(this.currentRoute);
-    }
-  },
   computed: {
     ...mapGetters(['getActiveStep', 'getNextStepLink']),
     currentRoute() {

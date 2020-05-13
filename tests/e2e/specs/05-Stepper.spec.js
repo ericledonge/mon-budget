@@ -1,4 +1,4 @@
-describe('Workflow', () => {
+describe('Stepper', () => {
   describe('When a visitor clicks on "Start your analyze"', () => {
     it('should be redirected to the basic info form', () => {
       cy.visit('/');

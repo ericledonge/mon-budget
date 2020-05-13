@@ -1,7 +1,7 @@
 <template>
   <span>
     <div class="columns is-centered is-mobile">
-      <div class="column is-3-desktop">
+      <div class="column is-4-desktop">
         <question :title="$t('basic-info.what-is-your-name')">
           <b-input v-model="name" data-test="name" required />
         </question>
