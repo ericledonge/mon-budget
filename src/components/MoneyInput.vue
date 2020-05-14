@@ -48,7 +48,7 @@ export default {
       }
     },
     resetFieldOnBlur() {
-      if (isNaN(this.innerValue)) {
+      if (isNaN(this.innerValue) || this.innerValue === '') {
         this.innerValue = 0;
       }
     }
