@@ -7,7 +7,22 @@ on:
       - master
 
 jobs:
-  test_pull_request:
+  build_and_publish_docker_image:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build container image
+        run: docker image build -t kumojin.azurecr.io/mon-budget:${{ github.sha }} .
+
+      - name: Docker Login
+        run: docker login kumojin.azurecr.io --username kumojin --password ${{ secrets.AZURE_TOKEN }}
+
+      - name: Push image to Azure registry
+        run: docker push kumojin.azurecr.io/mon-budget:${{ github.sha }}
+
+  deploy_on_netlify:
     runs-on: ubuntu-16.04
     steps:
       - name: Checkout
@@ -15,15 +30,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Run unit tests
-        run: npm run test:unit
-
-      - name: Run integration tests
-        uses: cypress-io/github-action@v1
-        with:
-          start: npm run serve
-          wait-on: http://localhost:8080
 
       - name: Build
         run: npm run build
