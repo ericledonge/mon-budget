@@ -1,5 +1,9 @@
 # Projet Mon Budget
 
+<img width="1132" alt="Capture d’écran, le 2021-12-21 à 21 32 25" src="https://user-images.githubusercontent.com/6333396/147025199-05b80bee-8cb8-4c0c-8405-a342c447b915.png">
+
+You can play with it there: https://elated-lichterman-c7d00b.netlify.app/
+
 ## Concepts
 
 Un plan de dépense est caractérisé par:
